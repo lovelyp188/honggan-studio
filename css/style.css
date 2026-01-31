@@ -1,0 +1,285 @@
+/* =====================
+   基本設定
+===================== */
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", "Noto Sans TC", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: black;
+  color: white;
+
+  --fire-core: rgba(255,120,0,1);
+  --fire-mid: rgba(255,80,0,0.7);
+  --fire-soft: rgba(0,0,0,0.9);
+  --fire-power: 1;
+}
+
+/* 首頁最狂 */
+body.home {
+  --fire-power: 1.6;
+}
+
+/* 內頁色系 */
+body.fire-purple {
+  --fire-core: rgba(200,120,255,1);
+  --fire-mid: rgba(140,60,255,0.7);
+}
+
+body.fire-blue {
+  --fire-core: rgba(120,180,255,1);
+  --fire-mid: rgba(80,120,255,0.7);
+}
+
+body.fire-red {
+  --fire-core: rgba(255,80,80,1);
+  --fire-mid: rgba(255,40,40,0.7);
+}
+
+body.fire-cyan {
+  --fire-core: rgba(120,255,220,1);
+  --fire-mid: rgba(60,220,200,0.7);
+}
+
+/* =====================
+   HERO 背景火焰
+===================== */
+.hero {
+  min-height: 100vh;
+  background: url("../images/bg-fire.png") center / cover no-repeat;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 80px 20px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  background: radial-gradient(
+    ellipse at 50% 38%,
+    var(--fire-core) 0%,
+    var(--fire-mid) 22%,
+    var(--fire-soft) 58%
+  );
+  filter: blur(calc(18px * var(--fire-power)));
+  mix-blend-mode: screen;
+  animation: fireCore 1.3s infinite alternate ease-in-out;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  background: radial-gradient(
+    circle at 50% 42%,
+    rgba(255,255,255,0.35) 0%,
+    var(--fire-mid) 18%,
+    var(--fire-soft) 55%
+  );
+  filter: blur(calc(26px * var(--fire-power)));
+  mix-blend-mode: overlay;
+  animation: fireFlicker 0.9s infinite steps(2);
+}
+
+@keyframes fireCore {
+  from { opacity: 0.7; transform: scale(1); }
+  to   { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes fireFlicker {
+  from { opacity: 0.5; }
+  to   { opacity: 0.95; }
+}
+
+/* =====================
+   LOGO 區（唯一主控版本）
+===================== */
+.logo-area {
+  text-align: center;
+  z-index: 5;
+  margin-bottom: 60px;
+}
+
+.logo-area img {
+  width: 190px;
+}
+
+/* 🔥 工作室名稱（全站統一） */
+.logo-area h1 {
+  display: block;
+  margin: 0 0 14px;
+
+  font-size: 52px;
+  letter-spacing: 5px;
+  transform: scaleX(1.18);
+
+  color: #ffe4b0;
+  text-shadow:
+    0 0 14px rgba(255,190,90,1),
+    0 0 30px rgba(255,120,0,0.9),
+    0 0 60px rgba(255,80,0,0.8);
+
+  animation: logoGlow 1.5s infinite alternate ease-in-out;
+}
+
+/* 首頁再加強一點氣勢 */
+body.home .logo-area h1 {
+  font-size: 56px;
+  transform: scaleX(1.22);
+}
+
+/* LOGO 下方說明 */
+.logo-area p {
+  margin: 6px 0;
+  opacity: 0.85;
+}
+
+.logo-hint {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* 字體火焰閃爍（穩定） */
+@keyframes logoGlow {
+  from {
+    opacity: 0.88;
+    text-shadow:
+      0 0 12px rgba(255,170,70,0.9),
+      0 0 26px rgba(255,120,0,0.7),
+      0 0 48px rgba(255,80,0,0.5);
+  }
+  to {
+    opacity: 1;
+    text-shadow:
+      0 0 20px rgba(255,210,120,1),
+      0 0 40px rgba(255,150,40,1),
+      0 0 72px rgba(255,90,0,0.9);
+  }
+}
+
+/* =====================
+   內容框
+===================== */
+.page-content {
+  z-index: 5;
+  max-width: 820px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 30px;
+  padding: 56px;
+  border: 1px solid rgba(255,140,0,0.6);
+  backdrop-filter: blur(6px);
+  text-align: center;
+}
+
+.subtitle {
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+/* =====================
+   🔥 服務卡爆燃
+===================== */
+.service-box {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.service-box a {
+  position: relative;
+  padding: 26px 46px;
+  border-radius: 22px;
+  border: 1px solid rgba(255,140,0,0.7);
+  color: #ffd28a;
+  text-decoration: none;
+  background: rgba(0,0,0,0.65);
+  overflow: hidden;
+  transition: transform 0.25s ease;
+  z-index: 1;
+}
+
+/* 火焰核心 */
+.service-box a::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(
+    circle at center,
+    var(--fire-core) 0%,
+    var(--fire-mid) 30%,
+    transparent 60%
+  );
+  opacity: 0;
+  filter: blur(28px);
+  transform: scale(0.6);
+  transition: opacity 0.25s, transform 0.25s;
+  z-index: -1;
+}
+
+/* hover 爆燃 */
+.service-box a:hover {
+  transform: translateY(-6px) scale(1.04);
+}
+
+.service-box a:hover::before {
+  opacity: 1;
+  transform: scale(1.4);
+}
+
+/* =====================
+   主按鈕
+===================== */
+.btn-main {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 14px 40px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff8a00, #ff3d00);
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-main:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 138, 0, 0.4);
+}
+
+/* =====================
+   RWD
+===================== */
+@media (max-width: 768px) {
+  .service-box a {
+    width: 100%;
+  }
+
+  .logo-area img {
+    width: 150px;
+  }
+
+  .logo-area h1 {
+    font-size: 42px;
+    transform: scaleX(1.12);
+  }
+
+  body.home .logo-area h1 {
+    font-size: 46px;
+    transform: scaleX(1.15);
+  }
+
+  .page-content {
+    padding: 40px 26px;
+  }
+}
